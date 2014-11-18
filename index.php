@@ -61,7 +61,7 @@
 			//mysql_select_db('site');
 			$link = mysqli_connect('localhost','root','','patent') or die("Error " . mysqli_error($link));
 			session_start();
-			$_SESSION['timeout']=10;
+			$_SESSION['timeout']=120;
 			if (isset($_COOKIE['a'])) {
 				$_SESSION['name']=$_COOKIE['a'];
 				setcookie("a",'$elogin',time()+$_SESSION['timeout']);

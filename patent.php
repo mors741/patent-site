@@ -79,7 +79,7 @@
 					// из временной директории в конечную
 					move_uploaded_file($_FILES["filename"]["tmp_name"], "Uploads/".$_FILES["filename"]["name"]);
 				} else {
-				  echo("Ошибка загрузки файла");
+				  //echo("Ошибка загрузки файла");
 			   }
 				$login = $_SESSION['login'];
 				$name = $_POST['name'];
