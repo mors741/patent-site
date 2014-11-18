@@ -20,7 +20,7 @@
 		</div> 
 		
 		<div id="reg">
-			<form method="post" action="patent.php" id="test">
+			<form method="post" action="patent.php" id="test" enctype="multipart/form-data">
 				Поля, помеченные звёздочкой, обязательны для заполнения<br />
 				<table>
 					<tr>
@@ -29,7 +29,7 @@
 					</tr>
 					<tr>
 						<td><b>Фотография:</b></td>
-						<td><input type="text" name="photo" /></td>
+						<td><input type="file" name="filename"></td>
 					</tr>
 					<tr>
 						<td><b>Описание<font color="red">*</font>:</b></td>
@@ -60,16 +60,33 @@
 				unset($_SESSION['admin']);
 				unset($_SESSION['login']);
 			}
-
+			
 			if(isset($_POST['register_p'])){
+				
+				if($_FILES["filename"]["size"] > 1024*3*1024)
+				{
+					echo ("Размер файла превышает три мегабайта");
+					exit;
+				}
+				// Проверяем загружен ли файл
+				if(is_uploaded_file($_FILES["filename"]["tmp_name"]))
+				{
+					// Если файл загружен успешно, перемещаем его
+					// из временной директории в конечную
+					move_uploaded_file($_FILES["filename"]["tmp_name"], "Uploads/".$_FILES["filename"]["name"]);
+				} else {
+				  echo("Ошибка загрузки файла");
+			   }
+			
 				$name=$_POST['name'];
-				$photo=$_POST['photo'];
+				//$photo=$_POST['photo'];
+				$photo="Uploads/".$_FILES["filename"]["name"];
 				$description=$_POST['description'];
 				
 				$query = "START TRANSACTION;" or die("Ошибка при выполнении запроса.." . mysqli_error($link));
 				$result = $link->query($query);
 				
-				$query = "CALL CheckInventions('$name', 'photo', @p_out);" or die("Ошибка при выполнении запроса.." . mysqli_error($link));
+				$query = "CALL CheckInventions('$name', '$description', @p_out);" or die("Ошибка при выполнении запроса.." . mysqli_error($link));
 				$result = $link->query($query);
 				
 				$query = "SELECT @p_out AS count;" or die("Ошибка при выполнении запроса.." . mysqli_error($link));
