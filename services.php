@@ -70,10 +70,17 @@
 													FROM inventions 
 													WHERE name = '$del_inv')" 
 										or die("Ошибка при выполнении запроса.." . mysqli_error($link));
+							$result = $link->query($query);
 						} else {
+							$query="UPDATE users SET inv_count=inv_count - 1 WHERE id = (SELECT author_id 
+																							FROM inventions 
+																							WHERE name = '$del_inv');" 
+									or die("Ошибка при выполнении запроса.." . mysqli_error($link)); 
+							$result = $link->query($query);
+							
 							$query = "DELETE FROM inventions WHERE name ='$del_inv'" or die("Ошибка при выполнении запроса.." . mysqli_error($link));
+							$result = $link->query($query);
 						}
-						$result = $link->query($query);
 						if ($link->affected_rows > 0){
 							echo '<font color="green">Изобретение удалено</font>';    
 						} else {

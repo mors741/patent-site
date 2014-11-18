@@ -77,10 +77,9 @@
 				} else {
 				  echo("Ошибка загрузки файла");
 			   }
-			
-				$name=$_POST['name'];
-				//$photo=$_POST['photo'];
-				$photo="Uploads/".$_FILES["filename"]["name"];
+				$login = $_SESSION['login'];
+				$name = $_POST['name'];
+				$photo = "Uploads/".$_FILES["filename"]["name"];
 				$description=$_POST['description'];
 				
 				$query = "START TRANSACTION;" or die("Ошибка при выполнении запроса.." . mysqli_error($link));
@@ -104,6 +103,10 @@
 					$query="INSERT INTO inventions (name, description, photo, author_id)
 								VALUES ('$name', '$description', '$photo', (SELECT id FROM users WHERE login = '".$_SESSION['login']."'))" or die("Ошибка при выполнении запроса.." . mysqli_error($link)); 
 					$result = $link->query($query);
+					
+					$query="UPDATE users SET inv_count=inv_count + 1 WHERE login = '$login';" or die("Ошибка при выполнении запроса.." . mysqli_error($link)); 
+					$result = $link->query($query);
+					
 					if ($result='TRUE'){
 						echo '<div id="m_success">
 								Изобретение успешно зарегистрировано.<br> 
