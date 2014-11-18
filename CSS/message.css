@@ -1,0 +1,30 @@
+#m_error{
+    position: relative;
+	color: red;
+    top: 63%;
+    left:35%;
+    width:55%;
+}
+
+#m_success{
+    position: relative;
+	color: green;
+    top: 63%;
+    left:35%;
+    width:55%;
+}
+
+#m_auth_err{
+    position: absolute;
+	color: red;
+    top: 33%;
+    left:87%;
+    width:13%;
+}
+#m_auth_suc{
+    position: absolute;
+	color: green;
+    top: 30%;
+    left:87%;
+    width:13%;
+}
