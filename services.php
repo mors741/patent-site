@@ -8,6 +8,7 @@
 		<link rel="stylesheet" type="text/css" href="CSS/fon.css" />
 		<link rel="stylesheet" type="text/css" href="CSS/menu.css"/>
 		<link rel="stylesheet" type="text/css" href="CSS/button.css" />
+		<link rel="stylesheet" type="text/css" href="CSS/message.css"/>
 
 		<div id="header">
 			<center><img src="Pictures/Top.jpg"/></center>
@@ -25,7 +26,11 @@
 			session_start();
 			if (isset($_COOKIE['a'])) {
 				$c=$_COOKIE['a'];
+				setcookie("a",'$elogin',time()+$_SESSION['timeout']);
 			} else {
+				if (isset($_SESSION['name'])) {
+					echo '<div id="m_auth_err">Извините, время вашей сессии истекло</div>';
+				}
 				unset($_SESSION['name']);
 				unset($_SESSION['admin']);
 				unset($_SESSION['login']);

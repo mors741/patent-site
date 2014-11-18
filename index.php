@@ -60,12 +60,16 @@
 			//mysql_connect('localhost','root','') or die (mysql_error());
 			//mysql_select_db('site');
 			$link = mysqli_connect('localhost','root','','patent') or die("Error " . mysqli_error($link));
-			$session_timeout = 120;
 			session_start();
+			$_SESSION['timeout']=10;
 			if (isset($_COOKIE['a'])) {
 				$_SESSION['name']=$_COOKIE['a'];
+				setcookie("a",'$elogin',time()+$_SESSION['timeout']);
 			} 
 			else {
+				if (isset($_SESSION['name'])) {
+					echo '<div id="m_auth_err">Извините, время вашей сессии истекло</div>';
+				}
 				unset($_SESSION['name']);
 				unset($_SESSION['admin']);
 				unset($_SESSION['login']);
@@ -75,7 +79,7 @@
 				unset($_SESSION['name']);
 				unset($_SESSION['admin']);
 				unset($_SESSION['login']); 
-				setcookie("a",'',time()-$session_timeout);
+				setcookie("a",'',time()-$_SESSION['timeout']);
             }
 			
 			if(isset($_POST['enter'])){
@@ -92,7 +96,7 @@
 				if($user_data['password']==$epassword){
 					$_SESSION['name']=$elogin; 
 					$_SESSION['login']=$elogin;
-					setcookie("a",'$elogin',time()+$session_timeout);
+					setcookie("a",'$elogin',time()+$_SESSION['timeout']);
 				
 					echo '<div id="m_auth_suc">Здравствуйте, ';
 					echo "$elogin</div>";

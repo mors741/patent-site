@@ -67,7 +67,11 @@
 			$link = mysqli_connect('localhost','root','','patent') or die("Ошибка при соединении с базой данных.." . mysqli_error($link));
 			if (isset($_COOKIE['a'])) {
 				$c=$_COOKIE['a'];
+				setcookie("a",'$elogin',time()+$_SESSION['timeout']);
 			} else {
+				if (isset($_SESSION['name'])) {
+					echo '<div id="m_auth_err">Извините, время вашей сессии истекло</div>';
+				}
 				unset($_SESSION['name']);
 				unset($_SESSION['admin']);
 				unset($_SESSION['login']);
