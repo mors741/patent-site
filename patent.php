@@ -83,8 +83,12 @@
 			   }
 				$login = $_SESSION['login'];
 				$name = $_POST['name'];
-				$photo = "Uploads/".$_FILES["filename"]["name"];
 				$description=$_POST['description'];
+				$photo = "Uploads/".$_FILES["filename"]["name"];
+				
+				if($photo == "Uploads/"){
+					$photo = "Uploads/no_photo.jpg";
+				}
 				
 				$query = "START TRANSACTION;" or die("Ошибка при выполнении запроса.." . mysqli_error($link));
 				$link->query($query);				

@@ -16,7 +16,7 @@
 		
 		<div id="reg">
 			<form method="post" action="registration.php" id="test">
-				Поля, помеченные звёздочкой, обязательны для заполнения<br>
+				Поля, помеченные звёздочкой, обязательны для заполнения<br><br>
 				<table>
 					<tr>
 						<td><b>Логин</b> <font color="red">*</font>:</td>
@@ -45,6 +45,7 @@
 					<tr>
 						<td><b>eMail</b> <font color="red">*</font>:</td>
 						<td><input type="text" name="mail" required/></td>
+						<td>(К сожалению, домены на кириллице пока не поддерживаются)</td>
 					</tr>
 				</table>
 				<input type="submit" name="register" value="Зарегистрироваться" />

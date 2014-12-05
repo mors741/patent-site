@@ -65,7 +65,7 @@
 							<br>
 							<input type="submit" value="Удалить"/>
 						</form>';
-					if (isset($_GET['inv'])){   // TODO: и админ
+					if (isset($_GET['inv'])){
 						$del_inv = $_GET['inv'];
 						$query = "set names 'utf8'" or die("Ошибка при выполнении запроса.." . mysqli_error($link)); 
 						$link->query($query);
