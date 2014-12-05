@@ -44,7 +44,7 @@
 					</tr>
 					<tr>
 						<td><b>eMail</b> <font color="red">*</font>:</td>
-						<td><input type="text" name="mail" required /></td>
+						<td><input type="text" name="mail" required/></td>
 					</tr>
 				</table>
 				<input type="submit" name="register" value="Зарегистрироваться" />
@@ -62,12 +62,10 @@
 
 		<?php
 			session_start();
-			//mysql_connect('localhost','root','') or die (mysql_error());
-			//mysql_select_db('site');
 			$link = mysqli_connect('localhost','root','','patent') or die("Ошибка при соединении с базой данных.." . mysqli_error($link));
-			if (isset($_COOKIE['a'])) {
-				$c=$_COOKIE['a'];
-				setcookie("a",'$elogin',time()+$_SESSION['timeout']);
+			if (isset($_COOKIE['login'])) {
+				$c=$_COOKIE['login'];
+				setcookie("login",'$elogin',time()+$_SESSION['timeout']);
 			} else {
 				if (isset($_SESSION['name'])) {
 					echo '<div id="m_auth_err">Извините, время вашей сессии истекло</div>';
@@ -85,29 +83,34 @@
 				$lname=$_POST['lname'];
 				$name=$_POST['name'];
 				$mail=$_POST['mail'];
-				if($password == $rpassword){
-					$password=md5($password);
-					//$result = mysql_query("SELECT id FROM logins WHERE login='$login'");
-					$query = "SELECT id FROM users WHERE login='$login'" or die("Ошибка при выполнении запроса.." . mysqli_error($link));
-					$result = $link->query($query);
-					$myrow = mysqli_fetch_array($result);
-					//$myrow = mysql_fetch_array($result);
-					if (!empty($myrow['id'])) {
-						echo ('<div id="m_error">Извините, введённый вами логин уже зарегистрирован. Введите другой логин</div>');
+				
+				if($password != $rpassword) {
+					echo '<div id="m_error">Извините, введенные вами пароли не совпадают</div>';
+				} else {
+					if(!filter_var($mail, FILTER_VALIDATE_EMAIL)){
+						echo ('<div id="m_error">Извините, введенный вами eMail адрес имеет некорректный формат.</div>');
 					} else {
-						$query = "set names 'cp1251'" or die("Ошибка при выполнении запроса.." . mysqli_error($link)); 
-						$link->query($query);
-						$query = "INSERT INTO users VALUES ('','$login','$password', '$fname','$name','$lname','$mail')" or die("Ошибка при выполнении запроса.." . mysqli_error($link));
+						$password=md5($password);
+						$query = "SELECT id FROM users WHERE login='$login'" or die("Ошибка при выполнении запроса.." . mysqli_error($link));
 						$result = $link->query($query);
-						if ($result='TRUE'){
-							echo '<div id="m_success">Вы успешно зарегистрированы! Теперь вы можете зайти на сайт</div>';    
-						}  
-					}			
-				} 
-				else{
-					echo '<div id="m_error">Пароли не совпадают</div>';
-					echo "\n";
-				}  
+						$myrow = mysqli_fetch_array($result);
+						$result->close();
+						if (!empty($myrow['id'])) {
+							echo ('<div id="m_error">Извините, введённый вами логин уже зарегистрирован. Введите другой логин</div>');
+						} else {
+							$query = "set names 'cp1251'" or die("Ошибка при выполнении запроса.." . mysqli_error($link)); 
+							$link->query($query);
+							$query = "INSERT INTO users VALUES ('','$login','$password', '$fname','$name','$lname','$mail',0)" or die("Ошибка при выполнении запроса.." . mysqli_error($link));
+							$result = $link->query($query);
+							if ($result == 'TRUE'){
+								echo '<div id="m_success">Вы успешно зарегистрированы! Теперь вы можете зайти на сайт</div>';    
+							}  
+							else {
+								echo '<div id="m_error">Ошибка при регистрации нового пользователя</div>';  
+							}
+						}			
+					} 
+				}
 			}
 			
 			if (isset($_SESSION['name'])) {

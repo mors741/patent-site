@@ -53,9 +53,9 @@
 		<?php
 			session_start();
 			$link = mysqli_connect('localhost','root','','patent') or die("Ошибка при соединении с базой данных.." . mysqli_error($link));
-			if (isset($_COOKIE['a'])) {
-				$c=$_COOKIE['a'];
-				setcookie("a",'$elogin',time()+$_SESSION['timeout']);
+			if (isset($_COOKIE['login'])) {
+				$c=$_COOKIE['login'];
+				setcookie("login",'$elogin',time()+$_SESSION['timeout']);
 			} else {
 				if (isset($_SESSION['name'])) {
 					echo '<div id="m_auth_err">Извините, время вашей сессии истекло</div>';
@@ -87,31 +87,31 @@
 				$description=$_POST['description'];
 				
 				$query = "START TRANSACTION;" or die("Ошибка при выполнении запроса.." . mysqli_error($link));
-				$result = $link->query($query);
+				$link->query($query);				
 				
 				$query = "CALL CheckInventions('$name', '$description', @p_out);" or die("Ошибка при выполнении запроса.." . mysqli_error($link));
-				$result = $link->query($query);
+				$link->query($query);
 				
 				$query = "SELECT @p_out AS count;" or die("Ошибка при выполнении запроса.." . mysqli_error($link));
 				$result = $link->query($query);
 				
 				$myrow = mysqli_fetch_array($result);
+				$result->close();
 				if ($myrow['count']>0) {
 					echo '<div id="m_error">Система обнаружила крайне схожее изобретение! Пожалуйста, исправьте название или описание изобретения.</div>';
 				}else{
 					$query = "set names 'cp1251'" or die("Ошибка при выполнении запроса.." . mysqli_error($link)); 
 					$link->query($query);
 					
-
-							
 					$query="INSERT INTO inventions (name, description, photo, author_id)
 								VALUES ('$name', '$description', '$photo', (SELECT id FROM users WHERE login = '".$_SESSION['login']."'))" or die("Ошибка при выполнении запроса.." . mysqli_error($link)); 
-					$result = $link->query($query);
+					$ins_res = $link->query($query);
 					
-					$query="UPDATE users SET inv_count=inv_count + 1 WHERE login = '$login';" or die("Ошибка при выполнении запроса.." . mysqli_error($link)); 
-					$result = $link->query($query);
-					
-					if ($result='TRUE'){
+					if ($ins_res == 'TRUE'){
+											
+						$query="UPDATE users SET inv_count=inv_count + 1 WHERE login = '$login';" or die("Ошибка при выполнении запроса.." . mysqli_error($link)); 
+						$link->query($query);
+						
 						echo '<div id="m_success">
 								Изобретение успешно зарегистрировано.<br> 
 								Вы можете получить копию авторского свидетельства прямо сейчас!<br><br> 
@@ -119,13 +119,19 @@
 							</div>';
 					} else {
 						echo '<div id="m_error">
-								Ошибка при добавлении в базу данных.
+								Система обнаружила крайне схожее изобретение! Пожалуйста, исправьте название или описание изобретения.
 							</div>';
 					}
-					
 				}
+				
+				$query = "DO SLEEP(5);" or die("Ошибка при выполнении запроса.." . mysqli_error($link));
+				$link->query($query);
+				
 				$query = "COMMIT;" or die("Ошибка при выполнении запроса.." . mysqli_error($link));
-				$result = $link->query($query);
+				$link->query($query);
+				
+
+				
 			}
 			mysqli_close($link);
 			

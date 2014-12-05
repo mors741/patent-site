@@ -24,9 +24,9 @@
 
        	<?php
 			session_start();
-			if (isset($_COOKIE['a'])) {
-				$c=$_COOKIE['a'];
-				setcookie("a",'$elogin',time()+$_SESSION['timeout']);
+			if (isset($_COOKIE['login'])) {
+				$c=$_COOKIE['login'];
+				setcookie("login",'$elogin',time()+$_SESSION['timeout']);
 			} else {
 				if (isset($_SESSION['name'])) {
 					echo '<div id="m_auth_err">Извините, время вашей сессии истекло</div>';
@@ -65,7 +65,7 @@
 							<br>
 							<input type="submit" value="Удалить"/>
 						</form>';
-					if (isset($_GET['inv'])){
+					if (isset($_GET['inv'])){   // TODO: и админ
 						$del_inv = $_GET['inv'];
 						$query = "set names 'utf8'" or die("Ошибка при выполнении запроса.." . mysqli_error($link)); 
 						$link->query($query);
