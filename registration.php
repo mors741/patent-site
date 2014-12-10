@@ -2,21 +2,38 @@
     <head>
         <title>Регистрация нового пользователя</title>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+		<link rel="shortcut icon" href="Pictures/idea.ico">
+		
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script language="javascript" src="js/dropdown.js"></script>
+		<script language="javascript" src="js/counter.js"></script>
+		<script language="javascript" src="js/registration.js"></script>
+		
+		<!-- Сделать локальными -->
+		<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+		<!-- -->
+		
+		<link rel="stylesheet" type="text/css" href="CSS/menu.css"/>
+		<link rel="stylesheet" type="text/css" href="CSS/button.css" />
+		<link rel="stylesheet" type="text/css" href="CSS/message.css"/>
+		<link rel="stylesheet" type="text/css" href="CSS/dropdown.css"/>
 	</head>
     <body>
-
-		<link rel="stylesheet" type="text/css" href="CSS/fon.css"/>
-		<link rel="stylesheet" type="text/css" href="CSS/menu.css"/>
-		<link rel="stylesheet" type="text/css" href="CSS/button.css"/>
-		<link rel="stylesheet" type="text/css" href="CSS/message.css"/>
-
-		<div id="header">
-			<a href="main.php"><center><img src="Pictures/Top.jpg"/></center></a>
-		</div> 
+		<div id="menu">
+			<a href="index.php" class="logo" onclick="myFunction()" ><p id="counter"><?php echo $_COOKIE['count']; ?></p></a>
+			<a href="index.php"><img src="Pictures/Logo.png"></a> <br>
+			
+			<a href="index.php" class="button" />Главная</a>
+			<a href="services.php" class="button"/>Услуги</a>
+			<a href="news.php" class="button"/>Новости</a>
+			<a href="inventions.php" class="button"/>Изобретения</a>
+			<a href="registration.php" class="button"/>Регистрация</a>
+		</div>
 		
 		<div id="reg">
 			<form method="post" action="registration.php" id="test">
-				Поля, помеченные звёздочкой, обязательны для заполнения<br><br>
+				Поля, помеченные звёздочкой <font color="red">*</font>, обязательны для заполнения<br>
 				<table>
 					<tr>
 						<td><b>Логин</b> <font color="red">*</font>:</td>
@@ -52,28 +69,19 @@
 			</form> 
 		
 		</div> 
-		
-		<div id="menu">
-			<a href="index.php" class="button" />Главная</a>
-			<a href="services.php" class="button"/>Услуги</a>
-			<a href="news.php" class="button"/>Новости</a>
-			<a href="inventions.php" class="button"/>Изобретения</a>
-			<a href="registration.php" class="button"/>Регистрация</a>
-		</div>
 
 		<?php
 			session_start();
 			$link = mysqli_connect('localhost','root','','patent') or die("Ошибка при соединении с базой данных.." . mysqli_error($link));
-			if (isset($_COOKIE['login'])) {
-				$c=$_COOKIE['login'];
-				setcookie("login",'$elogin',time()+$_SESSION['timeout']);
-			} else {
-				if (isset($_SESSION['name'])) {
-					echo '<div id="m_auth_err">Извините, время вашей сессии истекло</div>';
+
+			if (isset($_SESSION['login'])){
+				if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > $_SESSION['timeout'])) {
+					// last request was more than 2 minutes ago
+					session_unset();     // unset $_SESSION variable for the run-time 
+					session_destroy();   // destroy session data in storage
+					echo '<div class="m_auth error">Извините, время вашей сессии истекло</div>';
 				}
-				unset($_SESSION['name']);
-				unset($_SESSION['admin']);
-				unset($_SESSION['login']);
+				$_SESSION['last_activity'] = time(); // update last activity time stamp
 			}
 
 			if(isset($_POST['register'])){
@@ -114,10 +122,24 @@
 				}
 			}
 			
-			if (isset($_SESSION['name'])) {
-				echo '<br><div id="vhod"><form method="post" action="index.php">
-					<input type="submit" name="logout" value="Выйти"/>
-					</form></div>';
+			if (isset($_SESSION['login'])) {
+				echo '	<div id="sign-out">
+							<div class="dropdown">
+								<a class="account button" style="font:12px/normal sans-serif;">'.$_SESSION["login"].'<img src="Pictures/arrow.png" style="margin-left: 7px;"/></a>
+				
+								<div class="submenu" style="display: none; ">
+									<ul class="root">
+										<li><a href="inventions.php">Мои изобретения</a></li>
+										<li><a href="patent.php">Новое изобретение</a></li>
+										<li>
+											<form method="post" action="index.php">
+												<input type="submit" name="logout" value="Выйти"/>
+											</form>
+										</li>
+									</ul>
+								</div>
+							</div>				
+						</div>';
 			}
 		?>
 	</body>

@@ -2,71 +2,96 @@
     <head>
         <title>Регистрация нового пользователя</title>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
-		<style>
-   td {
-    vertical-align: top; /* Выравнивание по верхнему краю ячеек */
-   }
-  </style>
+		<link rel="shortcut icon" href="Pictures/idea.ico">
+		
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script language="javascript" src="js/dropdown.js"></script>
+		<script language="javascript" src="js/counter.js"></script>
+
+		<link rel="stylesheet" type="text/css" href="CSS/menu.css"/>
+		<link rel="stylesheet" type="text/css" href="CSS/button.css" />
+		<link rel="stylesheet" type="text/css" href="CSS/message.css"/>
+		<link rel="stylesheet" type="text/css" href="CSS/dropdown.css"/>
 	</head>
     <body>
-
-		<link rel="stylesheet" type="text/css" href="CSS/fon.css"/>
-		<link rel="stylesheet" type="text/css" href="CSS/menu.css"/>
-		<link rel="stylesheet" type="text/css" href="CSS/button.css"/>
-		<link rel="stylesheet" type="text/css" href="CSS/message.css"/>
-
-		<div id="header">
-			<a href="main.php"><center><img src="Pictures/Top.jpg"/></center></a>
-		</div> 
-		
-		<div id="reg">
-			<form method="post" action="patent.php" id="test" enctype="multipart/form-data">
-				Поля, помеченные звёздочкой, обязательны для заполнения<br />
-				<table>
-					<tr>
-						<td><b>Название<font color="red">*</font>:</b> </td>
-						<td><input type="text" name="name" required /></td>
-					</tr>
-					<tr>
-						<td><b>Фотография:</b></td>
-						<td><input type="file" name="filename"></td>
-					</tr>
-					<tr>
-						<td><b>Описание<font color="red">*</font>:</b></td>
-						<td>
-						<textarea name="description" rows="7" cols="50" required ></textarea></td>
-					</tr>
-				</table>
-				 <input type="submit" name="register_p" value="Зарегистрировать" />
-			</form> 
-		
-		</div> 
-		
 		<div id="menu">
+			<a href="index.php" class="logo" onclick="myFunction()" ><p id="counter"><?php echo $_COOKIE['count']; ?></p></a>
+			<a href="index.php"><img src="Pictures/Logo.png"></a> <br>
+			
 			<a href="index.php" class="button" />Главная</a>
 			<a href="services.php" class="button"/>Услуги</a>
 			<a href="news.php" class="button"/>Новости</a>
 			<a href="inventions.php" class="button"/>Изобретения</a>
 			<a href="registration.php" class="button"/>Регистрация</a>
 		</div>
-
 		<?php
-			session_start();
+			session_start();		
+			if (isset($_SESSION['login'])) {
+				echo '	<div id="reg">
+							<form method="post" action="patent.php" id="test" enctype="multipart/form-data">
+							Поля, помеченные звёздочкой <font color="red">*</font>, обязательны для заполнения<br>
+							<table>
+								<tr>
+									<td><b>Название<font color="red">*</font>:</b> </td>
+									<td><input type="text" name="name" class="inputs long" required /></td>
+								</tr>
+								<tr>
+									<td><b>Фотография:</b></td>
+									<td><input type="file" name="filename"></td>
+								</tr>
+								<tr>
+									<td><b>Описание<font color="red">*</font>:</b></td>
+									<td>
+									<textarea name="description" rows="7" cols="50" class="inputs long" required ></textarea></td>
+								</tr>
+								<tr>
+									<td></td>
+									<td><input type="checkbox" name="sleep" value="true">Включить задержку (для демонстрации)<br><br></td>
+								</tr>
+								<tr>
+									<td></td>
+									<td><input type="submit" name="register_p" class="button" value="Зарегистрировать"/></td>
+								</tr>
+							</table>
+						</form> 
+					</div> ';
+
+				echo '	<div id="sign-out">
+							<div class="dropdown">
+								<a class="account button" style="font:12px/normal sans-serif;">'.$_SESSION["login"].'<img src="Pictures/arrow.png" style="margin-left: 7px;"/></a>
+				
+								<div class="submenu" style="display: none; ">
+									<ul class="root">
+										<li><a href="inventions.php">Мои изобретения</a></li>
+										<li><a href="patent.php">Новое изобретение</a></li>
+										<li>
+											<form method="post" action="index.php">
+												<input type="submit" name="logout" value="Выйти"/>
+											</form>
+										</li>
+									</ul>
+								</div>
+							</div>				
+						</div>';
+			}else{
+				echo '<div id="content"><h3>Извините, регистрация нового изобретения доступна только авторизованным пользователям</h3></div>';
+			}
+		?>
+		
+		<?php
 			$link = mysqli_connect('localhost','root','','patent') or die("Ошибка при соединении с базой данных.." . mysqli_error($link));
-			if (isset($_COOKIE['login'])) {
-				$c=$_COOKIE['login'];
-				setcookie("login",'$elogin',time()+$_SESSION['timeout']);
-			} else {
-				if (isset($_SESSION['name'])) {
-					echo '<div id="m_auth_err">Извините, время вашей сессии истекло</div>';
+
+			if (isset($_SESSION['login'])){
+				if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > $_SESSION['timeout'])) {
+					// last request was more than 2 minutes ago
+					session_unset();     // unset $_SESSION variable for the run-time 
+					session_destroy();   // destroy session data in storage
+					echo '<div class="m_auth error">Извините, время вашей сессии истекло</div>';
 				}
-				unset($_SESSION['name']);
-				unset($_SESSION['admin']);
-				unset($_SESSION['login']);
+				$_SESSION['last_activity'] = time(); // update last activity time stamp
 			}
 			
-			if(isset($_POST['register_p'])){
-				
+			if(isset($_POST['register_p'])){		
 				if($_FILES["filename"]["size"] > 1024*3*1024)
 				{
 					echo ("Размер файла превышает три мегабайта");
@@ -102,7 +127,7 @@
 				$myrow = mysqli_fetch_array($result);
 				$result->close();
 				if ($myrow['count']>0) {
-					echo '<div id="m_error">Система обнаружила крайне схожее изобретение! Пожалуйста, исправьте название или описание изобретения.</div>';
+					echo ('<div class="m_new_inv error">Система обнаружила крайне схожее изобретение! Пожалуйста, исправьте название или описание изобретения.</div>');
 				}else{
 					$query = "set names 'cp1251'" or die("Ошибка при выполнении запроса.." . mysqli_error($link)); 
 					$link->query($query);
@@ -115,21 +140,15 @@
 											
 						$query="UPDATE users SET inv_count=inv_count + 1 WHERE login = '$login';" or die("Ошибка при выполнении запроса.." . mysqli_error($link)); 
 						$link->query($query);
-						
-						echo '<div id="m_success">
-								Изобретение успешно зарегистрировано.<br> 
-								Вы можете получить копию авторского свидетельства прямо сейчас!<br><br> 
-								<a href="inventions.php" class="button">Мои изобретения</a></p>
-							</div>';
+						echo ('<div class="m_new_inv success">Изобретение успешно зарегистрировано.</div>');
 					} else {
-						echo '<div id="m_error">
-								Система обнаружила крайне схожее изобретение! Пожалуйста, исправьте название или описание изобретения.
-							</div>';
+						echo ('<div class="m_new_inv error">Система обнаружила крайне схожее изобретение! Пожалуйста, исправьте название или описание изобретения.</div>');
 					}
 				}
-				
-				$query = "DO SLEEP(5);" or die("Ошибка при выполнении запроса.." . mysqli_error($link));
-				$link->query($query);
+				if (isset($_POST['sleep'])){
+					$query = "DO SLEEP(5);" or die("Ошибка при выполнении запроса.." . mysqli_error($link));
+					$link->query($query);
+				}
 				
 				$query = "COMMIT;" or die("Ошибка при выполнении запроса.." . mysqli_error($link));
 				$link->query($query);
@@ -138,12 +157,6 @@
 				
 			}
 			mysqli_close($link);
-			
-			if (isset($_SESSION['name'])) {
-				echo '<br><div id="vhod"><form method="post" action="index.php">
-					<input type="submit" name="logout" value="Выйти"/>
-					</form></div>';
-			}
 		?>
 	</body>
 </html>

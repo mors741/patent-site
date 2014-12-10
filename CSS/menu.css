@@ -1,46 +1,132 @@
-#vhod{
-position:absolute;
-top:23%;
-left:87%;
-}
-
 #reg{
     position:absolute;
-    top: 30%;
+    top: 18%;
     left: 35%;
     right: 5%;
 }
 
 #left{
-position:absolute;
-right:75%;
-top:50%    
-    
+	position:absolute;
+	right:75%;
+	top:23%    
 }
+
+body {
+	background: #fafafa;
+}	
+
 #menu{
-position:absolute;
-top:24%;
-left:30.5%;
+	position: absolute; /* Абсолютное позиционирование */
+	background-color: #ececec;
+	text-align: center;
+	border: 1.5px solid #b0b0b0;
+	display: block;
+	width:99.8%;
+	height:16%;
+    left: 0; /* Положение от левого края */
+    top: 0; /* Положение от верхнего края */
+	/*z-index:-1;*/    /*DEBUG!*/
 }
 
-#header{
-position:absolute;
-background-color:rgb(255,255,150);
-width:100%;
-height:28%;
-opacity: 0.85;
+.logo{
+	position: absolute;
+	top: 0.5%;
+	left: 23%;
+	width:100;
+	height:100;
+	z-index:100;
+	display: block;
+	text-decoration: none;
+	background: url("../Pictures/idea.png");
+	background-size: 100px 100px;
+	background-repeat:no-repeat;
 }
 
+.logo:hover {
+    background: url("../Pictures/idea_hover.png"); /* Путь к файлу с заменяемым рисунком  */
+	background-size: 100px 100px;
+	background-repeat:no-repeat;
+}
+
+#counter {
+	margin-top:28;
+	color:#817DDC;
+	font-weight: bold;
+}
 #content{
     position:absolute;
-    top: 30%;
+    top: 16%;
     left: 25%;
     right: 25%;
 }
 #right{
     position:absolute;
-    top: 50%;
+    top: 23%;
     left: 75%;
+}
+
+#sign-up{
+	position:absolute;
+	top:2%;
+	left:86%;
+}
+
+#sign-out{
+	position:absolute;
+	top:6%;
+	left:90%;
+}
+
+.invention{
+	text-align:center;
+	border-bottom: 1px solid #b0b0b0; /* Линия снизу */
+}
+
+.inputs{
+	width: 170px;
+	margin-top: 2px;
+    padding: 5px 8px;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: #9D9E9E;
+    text-shadow: 1px 1px 0 rgba(256, 256, 256, 1.0);
+    background: #FFF;
+    border: 1px solid #FFF;
+    border-radius: 5px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.50);
+    -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.50);
+    -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.50);
+}
+
+.inputs:focus {
+    background: #DFE9EC;
+    color: #414848;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25);
+    -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25);
+    outline: 0;
+}
+
+.inputs:hover {
+    background: #DFE9EC;
+    color: #414848;
+}
+
+.long{
+	width: 300px;
+}
+
+h1 {
+    text-align: center;
+}
+
+h3 {
+    text-align: center;
+}
+
+.center{
+	text-align: center;
 }
 
 .opisanie{
@@ -49,15 +135,6 @@ opacity: 0.85;
     left: 45%;
     width:50%;
 }
-
-#spectacles{
-    position: relative;
-    top: 30%;
-    left:25%;
-    width:15%;
-}
-
-
 
  .frame {
     border: 3px solid #00a8e1;
@@ -70,9 +147,4 @@ opacity: 0.85;
 }
 .error {
     color: red;
-}
-
-.text_h {
-  
- 
 }

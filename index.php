@@ -2,93 +2,105 @@
     <head>
         <title>Оформление авторских свидетельств</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf8"/>	
-	</head>
-    <body>
-        <div id="right">
-			<h3><b><p class="sample">Скажи НЕТ плагиату и пиратству!</p></b></h3>
-			<img src='Pictures/plagiat3.png' id="image_1"  width="350" height="250" style="position: absolute;" />		
-		</div>
+		<link rel="shortcut icon" href="Pictures/idea.ico">
 		
-        <link rel="stylesheet" type="text/css" href="CSS/fon.css"/>
-        <link rel="stylesheet" type="text/css" href="CSS/menu.css"/>
-        <link rel="stylesheet" type="text/css" href="CSS/button.css"/>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script language="javascript" src="js/dropdown.js"></script>
+		<script language="javascript" src="js/counter.js"></script>
+		<link rel="stylesheet" type="text/css" href="CSS/dropdown.css"/>	
+		<link rel="stylesheet" type="text/css" href="CSS/menu.css"/>
+		<link rel="stylesheet" type="text/css" href="CSS/button.css" />
 		<link rel="stylesheet" type="text/css" href="CSS/message.css"/>
 		
-		<div id="header">
-			<center><img src="Pictures/Top.jpg"/></center>
-		</div>
-		
-		<div id="right">
-
-		</div>
-		<?php
-			$link = mysqli_connect('localhost','root','','patent') or die("Error " . mysqli_error($link));
-			session_start();
-			$_SESSION['timeout']=120;
-			if (isset($_COOKIE['login'])) {
-				$_SESSION['name']=$_COOKIE['login'];
-				setcookie("login",'$elogin',time()+$_SESSION['timeout']);
-			} 
-			else {
-				if (isset($_SESSION['name'])) {
-					echo '<div id="m_auth_err">Извините, время вашей сессии истекло</div>';
-				}
-				unset($_SESSION['name']);
-				unset($_SESSION['admin']);
-				unset($_SESSION['login']);
-			}
-			
-			if(isset($_POST['logout'])){
-				unset($_SESSION['name']);
-				unset($_SESSION['admin']);
-				unset($_SESSION['login']); 
-				setcookie("login",'',time()-$_SESSION['timeout']);
-            }
-			
-			if(isset($_POST['enter'])){
-				$elogin=$_POST['elogin'];
-				$epassword=md5($_POST['epassword']);
-				//$query=mysql_query("SELECT * FROM users WHERE login='$elogin'");
-				$query = "SELECT login, password FROM users WHERE login='$elogin'" or die("Ошибка при выполнении запроса.." . mysqli_error($link)); 
-				$result = $link->query($query);
-				$user_data = mysqli_fetch_array($result);
-				//$user_data=mysql_fetch_array($query);
-				$login=$user_data['login'];
-				if($login=="admin")
-				$_SESSION['admin']=1;
-				if($user_data['password']==$epassword){
-					$_SESSION['name']=$elogin; 
-					$_SESSION['login']=$elogin;
-					setcookie("login",'$elogin',time()+$_SESSION['timeout']);
-				
-					echo '<div id="m_auth_suc">Здравствуйте, ';
-					echo "$elogin</div>";
-				}
-				else {
-					echo '<div id="m_auth_err">Неверный логин или пароль</div>';
-				}
- 
-			}
-			if (isset($_SESSION['name'])) {
-				echo '<br><div id="vhod"><form method="post" action="index.php">
-                <input type="submit" name="logout" value="Выйти"/>
-                </form></div>';
-            }
-            else{
-				echo '<div id="vhod"><form method="post" action="index.php">
-						<input type="text" name="elogin" placeholder="Логин"/><br />
-						<input type="password" name="epassword" placeholder="Пароль"/><br />
-						<input type="submit" name="enter" value="Вход"/>             
-					</form></div>';
-			}
-		?>
+	</head>
+    <body>
 		<div id="menu">
+			<a href="index.php" class="logo" onclick="myFunction()" ><p id="counter"><?php echo $_COOKIE['count']; ?></p></a>
+			<a href="index.php"><img src="Pictures/Logo.png"></a> <br>
+			
 			<a href="index.php" class="button" />Главная</a>
 			<a href="services.php" class="button"/>Услуги</a>
 			<a href="news.php" class="button"/>Новости</a>
 			<a href="inventions.php" class="button"/>Изобретения</a>
 			<a href="registration.php" class="button"/>Регистрация</a>
 		</div>
+		
+        <div id="right">
+			<h3>Скажи НЕТ плагиату и пиратству!</h3>
+			<img src='Pictures/plagiat3.png' id="image_1"  width="320" height="240" style="border: 1.5px solid #b0b0b0;" />		
+		</div>
+		
+		<?php
+			$link = mysqli_connect('localhost','root','','patent') or die("Error " . mysqli_error($link));
+			session_start();
+			
+			$_SESSION['timeout']=10;  //Поменьше
+			
+			if (isset($_SESSION['login'])){
+				if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > $_SESSION['timeout'])) {
+					// last request was more than 2 minutes ago
+					session_unset();     // unset $_SESSION variable for the run-time 
+					session_destroy();   // destroy session data in storage
+					echo '<div class="m_auth error">Извините, время вашей сессии истекло</div>';
+				}
+				$_SESSION['last_activity'] = time(); // update last activity time stamp
+			}
+			
+			if (isset($_COOKIE['count']) === FALSE){
+				$t = strtotime('tomorrow');
+				setcookie("count",'0',"$t");
+			}
+			
+			if(isset($_POST['enter'])){
+				$_POST['password']=md5($_POST['password']);
+				$query = "SELECT password FROM users WHERE login='".$_POST['login']."';" or die("Ошибка при выполнении запроса.." . mysqli_error($link)); 
+				$result = $link->query($query);
+				$user_data = mysqli_fetch_array($result);
+				$result->close();
+				if($_POST['login']=="admin")
+					$_SESSION['admin']=1;
+				if($user_data['password']==$_POST['password']){
+					$_SESSION['login']=$_POST['login'];
+					setcookie("login",$_POST['login'],time()+86400); // 1 day
+					echo ('<div class="m_auth success">Добро пожаловать, '.$_SESSION["login"].'!</div>');
+				}
+				else {
+					echo '<div class="m_auth error">Неверный логин или пароль</div>';
+				}
+			}
+			
+			if(isset($_POST['logout'])){
+				session_unset();     // unset $_SESSION variable for the run-time 
+				session_destroy();   // destroy session data in storage
+            }
+			
+			if (isset($_SESSION['login'])){				
+				echo '	<div id="sign-out">
+							<div class="dropdown">
+								<a class="account button" style="font:12px/normal sans-serif;">'.$_SESSION["login"].'<img src="Pictures/arrow.png" style="margin-left: 7px;"/></a>
+				
+								<div class="submenu" style="display: none; ">
+									<ul class="root">
+										<li><a href="inventions.php">Мои изобретения</a></li>
+										<li><a href="patent.php">Новое изобретение</a></li>
+										<li>
+											<form method="post" action="index.php">
+												<input type="submit" name="logout" value="Выйти"/>
+											</form>
+										</li>
+									</ul>
+								</div>
+							</div>				
+						</div>';
+				
+			} else {
+				echo '<div id="sign-up"><form method="post" action="index.php">
+						<input type="text" class="inputs" name="login" placeholder="Логин"/><br />
+						<input type="password" class="inputs" name="password" placeholder="Пароль"/><br />
+						<input type="submit" class="button primary" name="enter" value="Вход"/>             
+					</form></div>';
+			}
+		?>
 
 		<div id="content"> <br>
 			<h1>Добро пожаловать!</h1>
