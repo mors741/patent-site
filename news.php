@@ -34,7 +34,7 @@
 						// last request was more than 2 minutes ago
 						session_unset();     // unset $_SESSION variable for the run-time 
 						session_destroy();   // destroy session data in storage
-						echo '<div class="m_auth error">Извините, время вашей сессии истекло</div>';
+						echo '<div class="m_auth m_error">Извините, время вашей сессии истекло</div>';
 					}
 					$_SESSION['last_activity'] = time(); // update last activity time stamp
 				}
@@ -54,9 +54,11 @@
 					foreach($xmlfile->channel->item as $data)
 					{
 						$i++;
-						echo '<h3><a href="'.$data->link.'">'.$data->title.'</a></h3>';
-						echo $time = date("d.m.Y H:i:s",strtotime($data->pubDate)) ;
-						echo '<p>'.$data->description.'</p>';
+						echo '<div class="sector">';
+						echo 	'<h3><a href="'.$data->link.'">'.$data->title.'</a></h3>';
+						echo '<p style="margin-right: 500; text-decoration: underline;">'.date("d.m.Y H:i:s",strtotime($data->pubDate)).'</p>' ;
+						echo 	'<p>'.$data->description.'</p>';
+						echo '</div>';
 						if ($i>4) break;
 					}
 				} else {

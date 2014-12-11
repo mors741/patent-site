@@ -10,7 +10,7 @@ if (!addslashes($searchq) == "") {
 	$like = "'%".addslashes($searchq)."%'";
 
 	$query = "SELECT name FROM inventions WHERE name LIKE $like" or die("Ошибка при выполнении запроса.." . mysqli_error($link)); 
-		$result = $link->query($query);			
+	$result = $link->query($query);			
 	while ($row = mysqli_fetch_array($result))
 		echo $row['name'] . '<br><br>';
 }

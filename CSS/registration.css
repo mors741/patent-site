@@ -1,0 +1,74 @@
+#register-form {
+	background: -webkit-linear-gradient(#f2f2fb, #cccbf1); /* For Safari 5.1 to 6.0 */
+	background: -o-linear-gradient(#f2f2fb, #cccbf1, #817ddc); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(#f2f2fb, #cccbf1, #817ddc); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(#fcfcff, #f5f5ff); /* Standard syntax */
+	
+    border: 1px solid #DFDCDC;
+    border-radius: 15px 15px 15px 15px;
+    display: inline-block;
+    margin-bottom: 30px;
+    margin-left: 20px;
+    margin-top: 10px;
+    padding: 25px 50px 10px;
+    width: 350px;
+}
+ 
+#register-form  fieldset {
+    border:0px;
+}
+ 
+#register-form .fieldgroup {
+    background: url("../Pictures/form-divider.gif") repeat-x scroll left top transparent;
+    display: inline-block;
+    padding: 8px 10px;
+    width: 340px;
+}
+ 
+#register-form .fieldgroup label {
+    float: left;
+    padding: 15px 0 0;
+    text-align: right;
+    width: 70px;
+	border:0px;
+}
+ 
+#register-form .fieldgroup input, #register-form .fieldgroup textarea, #register-form .fieldgroup select {
+    float: right;
+    margin: 10px 0;
+    height: 32px;
+}
+/* 
+#register-form .submit {
+    padding: 10px;
+    width: 220px;
+    height: 40px !important;
+}
+ */
+#register-form .fieldgroup label.error {
+    color: #FB3A3A;
+    display: inline-block;
+    margin: 4px 0 5px 45px;
+    padding: 0;
+    text-align: left;
+    width: 290px;
+}
+
+#login{
+	padding:3px;
+	font-size:18px;
+	border:3px #CCC solid;
+}
+
+#tick{
+	position: absolute;
+	top: 148px;
+	left: 52%;
+	display:none;
+}
+#cross{
+	position: absolute;
+	top: 148px;
+	left: 52%;
+	display:none;
+}

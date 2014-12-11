@@ -34,14 +34,14 @@
 			$link = mysqli_connect('localhost','root','','patent') or die("Error " . mysqli_error($link));
 			session_start();
 			
-			$_SESSION['timeout']=10;  //Поменьше
+			$_SESSION['timeout']=120;  //Поменьше
 			
 			if (isset($_SESSION['login'])){
 				if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > $_SESSION['timeout'])) {
 					// last request was more than 2 minutes ago
 					session_unset();     // unset $_SESSION variable for the run-time 
 					session_destroy();   // destroy session data in storage
-					echo '<div class="m_auth error">Извините, время вашей сессии истекло</div>';
+					echo '<div class="m_auth m_error">Извините, время вашей сессии истекло</div>';
 				}
 				$_SESSION['last_activity'] = time(); // update last activity time stamp
 			}
@@ -62,10 +62,10 @@
 				if($user_data['password']==$_POST['password']){
 					$_SESSION['login']=$_POST['login'];
 					setcookie("login",$_POST['login'],time()+86400); // 1 day
-					echo ('<div class="m_auth success">Добро пожаловать, '.$_SESSION["login"].'!</div>');
+					echo ('<div class="m_auth m_success">Добро пожаловать, '.$_SESSION["login"].'!</div>');
 				}
 				else {
-					echo '<div class="m_auth error">Неверный логин или пароль</div>';
+					echo '<div class="m_auth m_error">Неверный логин или пароль</div>';
 				}
 			}
 			

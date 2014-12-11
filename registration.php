@@ -1,125 +1,117 @@
-<html>
+п»ї<html>
     <head>
-        <title>Регистрация нового пользователя</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+        <title>Р РµРіРёСЃС‚СЂР°С†РёСЏ РЅРѕРІРѕРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf8">
 		<link rel="shortcut icon" href="Pictures/idea.ico">
 		
 		<script type="text/javascript" src="js/jquery.min.js"></script>
-		<script language="javascript" src="js/dropdown.js"></script>
-		<script language="javascript" src="js/counter.js"></script>
-		<script language="javascript" src="js/registration.js"></script>
+		<script type="text/javascript" src="js/dropdown.js"></script>
+		<script type="text/javascript" src="js/counter.js"></script>
+		<script type="text/javascript" src="js/registration.js"></script>
 		
-		<!-- Сделать локальными -->
-		<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+		<!-- РЎРґРµР»Р°С‚СЊ Р»РѕРєР°Р»СЊРЅС‹РјРё -->
+		<script src="//code.jquery.com/jquery-1.9.1.js"></script>
+		<script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
 		<!-- -->
 		
 		<link rel="stylesheet" type="text/css" href="CSS/menu.css"/>
 		<link rel="stylesheet" type="text/css" href="CSS/button.css" />
 		<link rel="stylesheet" type="text/css" href="CSS/message.css"/>
 		<link rel="stylesheet" type="text/css" href="CSS/dropdown.css"/>
+		<link rel="stylesheet" type="text/css" href="CSS/registration.css"/>
+		
 	</head>
     <body>
 		<div id="menu">
 			<a href="index.php" class="logo" onclick="myFunction()" ><p id="counter"><?php echo $_COOKIE['count']; ?></p></a>
 			<a href="index.php"><img src="Pictures/Logo.png"></a> <br>
 			
-			<a href="index.php" class="button" />Главная</a>
-			<a href="services.php" class="button"/>Услуги</a>
-			<a href="news.php" class="button"/>Новости</a>
-			<a href="inventions.php" class="button"/>Изобретения</a>
-			<a href="registration.php" class="button"/>Регистрация</a>
+			<a href="index.php" class="button" />Р“Р»Р°РІРЅР°СЏ</a>
+			<a href="services.php" class="button"/>РЈСЃР»СѓРіРё</a>
+			<a href="news.php" class="button"/>РќРѕРІРѕСЃС‚Рё</a>
+			<a href="inventions.php" class="button"/>РР·РѕР±СЂРµС‚РµРЅРёСЏ</a>
+			<a href="registration.php" class="button"/>Р РµРіРёСЃС‚СЂР°С†РёСЏ</a>
 		</div>
+		<!--
 		
 		<div id="reg">
 			<form method="post" action="registration.php" id="test">
-				Поля, помеченные звёздочкой <font color="red">*</font>, обязательны для заполнения<br>
+				РџРѕР»СЏ, РїРѕРјРµС‡РµРЅРЅС‹Рµ Р·РІС‘Р·РґРѕС‡РєРѕР№ <font color="red">*</font>, РѕР±СЏР·Р°С‚РµР»СЊРЅС‹ РґР»СЏ Р·Р°РїРѕР»РЅРµРЅРёСЏ<br>
 				<table>
 					<tr>
-						<td><b>Логин</b> <font color="red">*</font>:</td>
+						<td><b>Р›РѕРіРёРЅ</b> <font color="red">*</font>:</td>
 						<td><input type="text" name="login" required /></td>
 					</tr>
 					<tr>
-						<td><b>Пароль</b> <font color="red">*</font>:</td>
+						<td><b>РџР°СЂРѕР»СЊ</b> <font color="red">*</font>:</td>
 						<td><input type="password" class="password" name="password" id="password" required /></td>
 					</tr>
 					<tr>
-						<td><b>Повторите пароль</b> <font color="red">*</font>:</td>
+						<td><b>РџРѕРІС‚РѕСЂРёС‚Рµ РїР°СЂРѕР»СЊ</b> <font color="red">*</font>:</td>
 						<td><input type="password" name="rpassword" id="pass2" required /></td>
 					</tr>
 					<tr>
-						<td><b>Фамилия</b> <font color="red">*</font>:</td>
+						<td><b>Р¤Р°РјРёР»РёСЏ</b> <font color="red">*</font>:</td>
 						<td><input type="text" name="fname" required /></td>
 					</tr>
 					<tr>
-						<td><b>Имя</b> <font color="red">*</font>:</td>
+						<td><b>РРјСЏ</b> <font color="red">*</font>:</td>
 						<td><input type="text" name="name" required /></td>
 					</tr>
 					<tr>
-						<td><b>Отчество</b>:</td>
+						<td><b>РћС‚С‡РµСЃС‚РІРѕ</b>:</td>
 						<td><input type="text" name="lname" /></td>
 					</tr>
 					<tr>
 						<td><b>eMail</b> <font color="red">*</font>:</td>
 						<td><input type="text" name="mail" required/></td>
-						<td>(К сожалению, домены на кириллице пока не поддерживаются)</td>
+						<td>(Рљ СЃРѕР¶Р°Р»РµРЅРёСЋ, РґРѕРјРµРЅС‹ РЅР° РєРёСЂРёР»Р»РёС†Рµ РїРѕРєР° РЅРµ РїРѕРґРґРµСЂР¶РёРІР°СЋС‚СЃСЏ)</td>
 					</tr>
 				</table>
-				<input type="submit" name="register" value="Зарегистрироваться" />
+				<input type="submit" name="register" value="Р—Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°С‚СЊСЃСЏ" />
 			</form> 
-		
-		</div> 
+			-->
 
 		<?php
 			session_start();
-			$link = mysqli_connect('localhost','root','','patent') or die("Ошибка при соединении с базой данных.." . mysqli_error($link));
+			$link = mysqli_connect('localhost','root','','patent') or die("РћС€РёР±РєР° РїСЂРё СЃРѕРµРґРёРЅРµРЅРёРё СЃ Р±Р°Р·РѕР№ РґР°РЅРЅС‹С….." . mysqli_error($link));
 
 			if (isset($_SESSION['login'])){
 				if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > $_SESSION['timeout'])) {
 					// last request was more than 2 minutes ago
 					session_unset();     // unset $_SESSION variable for the run-time 
 					session_destroy();   // destroy session data in storage
-					echo '<div class="m_auth error">Извините, время вашей сессии истекло</div>';
+					echo '<div class="m_auth error">РР·РІРёРЅРёС‚Рµ, РІСЂРµРјСЏ РІР°С€РµР№ СЃРµСЃСЃРёРё РёСЃС‚РµРєР»Рѕ</div>';
 				}
 				$_SESSION['last_activity'] = time(); // update last activity time stamp
 			}
 
 			if(isset($_POST['register'])){
 				$login=$_POST['login'];
-				$password=$_POST['password'];
-				$rpassword=$_POST['rpassword'];
+				$password=md5($_POST['password']);
 				$fname=$_POST['fname'];
 				$lname=$_POST['lname'];
-				$name=$_POST['name'];
-				$mail=$_POST['mail'];
+				$pname=$_POST['pname'];
+				$email=$_POST['email'];
 				
-				if($password != $rpassword) {
-					echo '<div id="m_error">Извините, введенные вами пароли не совпадают</div>';
+				$query = "SELECT id FROM users WHERE login='$login'" or die("РћС€РёР±РєР° РїСЂРё РІС‹РїРѕР»РЅРµРЅРёРё Р·Р°РїСЂРѕСЃР°.." . mysqli_error($link));
+				$result = $link->query($query);
+				$myrow = mysqli_fetch_array($result);
+				$result->close();
+				if (!empty($myrow['id'])) {
+					echo ('<div class="m_auth m_error">РР·РІРёРЅРёС‚Рµ, РІРІРµРґС‘РЅРЅС‹Р№ РІР°РјРё Р»РѕРіРёРЅ<br> СѓР¶Рµ Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅ.<br>Р’РІРµРґРёС‚Рµ РґСЂСѓРіРѕР№ Р»РѕРіРёРЅ</div>');
 				} else {
-					if(!filter_var($mail, FILTER_VALIDATE_EMAIL)){
-						echo ('<div id="m_error">Извините, введенный вами eMail адрес имеет некорректный формат.</div>');
-					} else {
-						$password=md5($password);
-						$query = "SELECT id FROM users WHERE login='$login'" or die("Ошибка при выполнении запроса.." . mysqli_error($link));
-						$result = $link->query($query);
-						$myrow = mysqli_fetch_array($result);
-						$result->close();
-						if (!empty($myrow['id'])) {
-							echo ('<div id="m_error">Извините, введённый вами логин уже зарегистрирован. Введите другой логин</div>');
-						} else {
-							$query = "set names 'cp1251'" or die("Ошибка при выполнении запроса.." . mysqli_error($link)); 
-							$link->query($query);
-							$query = "INSERT INTO users VALUES ('','$login','$password', '$fname','$name','$lname','$mail',0)" or die("Ошибка при выполнении запроса.." . mysqli_error($link));
-							$result = $link->query($query);
-							if ($result == 'TRUE'){
-								echo '<div id="m_success">Вы успешно зарегистрированы! Теперь вы можете зайти на сайт</div>';    
-							}  
-							else {
-								echo '<div id="m_error">Ошибка при регистрации нового пользователя</div>';  
-							}
-						}			
-					} 
-				}
+					$query = "set names 'cp1251'" or die("РћС€РёР±РєР° РїСЂРё РІС‹РїРѕР»РЅРµРЅРёРё Р·Р°РїСЂРѕСЃР°.." . mysqli_error($link)); 
+					$link->query($query);
+					$query = "INSERT INTO users VALUES ('','$login','$password', '$fname','$pname','$lname','$email',0)" or die("РћС€РёР±РєР° РїСЂРё РІС‹РїРѕР»РЅРµРЅРёРё Р·Р°РїСЂРѕСЃР°.." . mysqli_error($link));
+					$result = $link->query($query);
+					if ($result == 'TRUE'){
+						echo '<div class="m_auth m_success">Р’С‹ СѓСЃРїРµС€РЅРѕ Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅС‹!<br>РўРµРїРµСЂСЊ РІС‹ РјРѕР¶РµС‚Рµ Р·Р°Р№С‚Рё РЅР° СЃР°Р№С‚</div>';    
+					}  
+					else {
+						echo '<div class="m_auth m_error">РћС€РёР±РєР° РїСЂРё СЂРµРіРёСЃС‚СЂР°С†РёРё<br>РЅРѕРІРѕРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ</div>';  
+					}
+				}			
 			}
 			
 			if (isset($_SESSION['login'])) {
@@ -129,11 +121,11 @@
 				
 								<div class="submenu" style="display: none; ">
 									<ul class="root">
-										<li><a href="inventions.php">Мои изобретения</a></li>
-										<li><a href="patent.php">Новое изобретение</a></li>
+										<li><a href="inventions.php">РњРѕРё РёР·РѕР±СЂРµС‚РµРЅРёСЏ</a></li>
+										<li><a href="patent.php">РќРѕРІРѕРµ РёР·РѕР±СЂРµС‚РµРЅРёРµ</a></li>
 										<li>
 											<form method="post" action="index.php">
-												<input type="submit" name="logout" value="Выйти"/>
+												<input type="submit" name="logout" value="Р’С‹Р№С‚Рё"/>
 											</form>
 										</li>
 									</ul>
@@ -142,5 +134,62 @@
 						</div>';
 			}
 		?>
+		<div id="reg">
+			<form action="" method="post" id="register-form" novalidate="novalidate">
+				<h1>Р РµРіРёСЃС‚СЂР°С†РёСЏ</h1>
+			 
+				<div id="form-content">
+					<fieldset>
+						
+						<div class="fieldgroup">
+							<label for="login">Р›РѕРіРёРЅ</label>
+							<input type="text" name="login" id="login" class="medium inputs"/>
+							<img id="tick" src="Pictures/tick.png" width="16" height="16"/>
+							<img id="cross" src="Pictures/cross.png" width="16" height="16"/>
+						</div>
+						
+						<div class="fieldgroup">
+							<label for="password">РџР°СЂРѕР»СЊ</label>
+							<input type="password" id="password" name="password" class="medium inputs"/>
+						</div>
+						
+						<div class="fieldgroup">
+							<label for="rpassword">РџРѕРІС‚РѕСЂРёС‚Рµ РїР°СЂРѕР»СЊ</label>
+							<input type="password" id="rpassword" name="rpassword" class="medium inputs"/>
+						</div>
+						
+						<div class="fieldgroup">
+							<label for="lname">Р¤Р°РјРёР»РёСЏ</label>
+							<input type="text" name="lname" class="medium inputs"/>
+						</div>
+						
+						<div class="fieldgroup">
+							<label for="ftname">РРјСЏ</label>
+							<input type="text" name="fname" class="medium inputs"/>
+						</div>
+						
+						<div class="fieldgroup">
+							<label for="pname">РћС‚С‡РµСЃС‚РІРѕ</label>
+							<input type="text" name="pname" class="medium inputs"/>
+						</div>
+			 
+						<div class="fieldgroup">
+							<label for="email">Email</label>
+							<input type="text" name="email" class="medium inputs"/>
+						</div>
+			 
+						<div class="fieldgroup" >
+							<input type="submit" class="button subit" value="Р—Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°С‚СЊСЃСЏ" name="register" style="margin-right: 100;"/>
+						</div>
+			 
+					</fieldset>
+				</div>
+			 
+				<div class="fieldgroup">
+					<p>РЈР¶Рµ Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅС‹? <a href="index.php">Р’РѕР№С‚Рё</a>.</p>
+				</div>
+			</form>
+		
+		</div> 
 	</body>
 </html>

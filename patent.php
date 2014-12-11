@@ -86,7 +86,7 @@
 					// last request was more than 2 minutes ago
 					session_unset();     // unset $_SESSION variable for the run-time 
 					session_destroy();   // destroy session data in storage
-					echo '<div class="m_auth error">Извините, время вашей сессии истекло</div>';
+					echo '<div class="m_auth m_error">Извините, время вашей сессии истекло</div>';
 				}
 				$_SESSION['last_activity'] = time(); // update last activity time stamp
 			}
@@ -127,7 +127,7 @@
 				$myrow = mysqli_fetch_array($result);
 				$result->close();
 				if ($myrow['count']>0) {
-					echo ('<div class="m_new_inv error">Система обнаружила крайне схожее изобретение! Пожалуйста, исправьте название или описание изобретения.</div>');
+					echo ('<div class="m_new_inv m_error">Система обнаружила крайне схожее изобретение! Пожалуйста, исправьте название или описание изобретения.</div>');
 				}else{
 					$query = "set names 'cp1251'" or die("Ошибка при выполнении запроса.." . mysqli_error($link)); 
 					$link->query($query);
@@ -140,9 +140,9 @@
 											
 						$query="UPDATE users SET inv_count=inv_count + 1 WHERE login = '$login';" or die("Ошибка при выполнении запроса.." . mysqli_error($link)); 
 						$link->query($query);
-						echo ('<div class="m_new_inv success">Изобретение успешно зарегистрировано.</div>');
+						echo ('<div class="m_new_inv m_success">Изобретение успешно зарегистрировано.</div>');
 					} else {
-						echo ('<div class="m_new_inv error">Система обнаружила крайне схожее изобретение! Пожалуйста, исправьте название или описание изобретения.</div>');
+						echo ('<div class="m_new_inv m_error">Система обнаружила крайне схожее изобретение! Пожалуйста, исправьте название или описание изобретения.</div>');
 					}
 				}
 				if (isset($_POST['sleep'])){

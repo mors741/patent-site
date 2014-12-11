@@ -34,7 +34,7 @@
 					// last request was more than 2 minutes ago
 					session_unset();     // unset $_SESSION variable for the run-time 
 					session_destroy();   // destroy session data in storage
-					echo '<div class="m_auth error">Извините, время вашей сессии истекло</div>';
+					echo '<div class="m_auth m_error">Извините, время вашей сессии истекло</div>';
 				}
 				$_SESSION['last_activity'] = time(); // update last activity time stamp
 			}
@@ -106,9 +106,9 @@
 							$result = $link->query($query);
 						}
 						if ($link->affected_rows > 0){
-							echo ('<div class="success m_delete">Изобретение успешно удалено</div>');
+							echo ('<div class="m_success m_delete">Изобретение успешно удалено</div>');
 						} else {
-							echo ('<div class="m_delete error">Изобретения с таким названием не существует.</div>');
+							echo ('<div class="m_delete m_error">Изобретения с таким названием не существует.</div>');
 						}
 					}
 			}
@@ -137,7 +137,7 @@
 			echo ('<div id="content">');
 			echo "<h1>Последние 10 зарегистрированных изобретений:</h1>";
 			do {
-				echo ('<div class="invention">
+				echo ('<div class="sector">
 							<h3>'.$inv_data['name'].'</h3>'
 							.'<center><img src="'.$inv_data['photo'].'" width="300" height="300" style="border: 1.5px solid #b0b0b0;"/></center><br>'."\n"
 							.'<p>'.$inv_data['description']."</p>\n"

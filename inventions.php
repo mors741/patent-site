@@ -33,7 +33,7 @@
 					// last request was more than 2 minutes ago
 					session_unset();     // unset $_SESSION variable for the run-time 
 					session_destroy();   // destroy session data in storage
-					echo '<div class="m_auth error">Извините, время вашей сессии истекло</div>';
+					echo '<div class="m_auth m_error">Извините, время вашей сессии истекло</div>';
 				}
 				$_SESSION['last_activity'] = time(); // update last activity time stamp
 			}
@@ -51,12 +51,12 @@
 						ORDER BY date DESC" 
 						or die("Ошибка при выполнении запроса.." . mysqli_error($link));
 				$result = $link->query($query);
-				$inv_data = mysqli_fetch_array($result);	
+				//$inv_data = mysqli_fetch_array($result);	
 				
 				echo ('<div id="content">');
 				echo "<h1>Ваши изобретения</h1>";
-				do {
-					echo ('<div class="invention">
+				while ($inv_data=mysqli_fetch_array($result)){
+					echo ('<div class="sector">
 								<h3>'.$inv_data['name'].'</h3>'
 								.'<center><img src="'.$inv_data['photo'].'" width="300" height="300" style="border: 1.5px solid #b0b0b0;"/></center><br>'."\n"
 								.'<p>'.$inv_data['description']."</p>\n"
@@ -65,8 +65,7 @@
 								//."<p><a href='http://www.finas.su/images/avtor/ouc131206author700kav.jpg'>Свидетельство</a></p>\n"
 							);
 					echo ('</div>');
-				}
-				while ($inv_data=mysqli_fetch_array($result));
+				};
 				echo ('</div>');
 			} else {
 				echo '<div id="content"><h2>Для просмотра своих изобретений и получения копии авторского свидетельства вы должны быть авторизованы <h2></div>';
