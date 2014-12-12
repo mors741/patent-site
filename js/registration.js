@@ -1,6 +1,6 @@
 ﻿
 $(document).ready(function(){
-	
+	var login_correct = false;
     $.validator.addMethod(
         "uniqueUserName", 
         function(value, element) {
@@ -14,13 +14,17 @@ $(document).ready(function(){
                 {
 					res = response;
 					if(response == 1){
-						$('#login').css('border', '3px #C33 solid');	
+						//$('#login').css('border', '3px #C33 solid');	
 						$('#tick').hide();
 						$('#cross').fadeIn();
+						$('#login_error').fadeIn();
+						login_correct = false;
 					}else{
-						$('#login').css('border', '3px #090 solid');
+						//$('#login').css('border', '3px #090 solid');
 						$('#cross').hide();
 						$('#tick').fadeIn();
+						$('#login_error').hide();
+						login_correct = true;
 					}
                 }
             });
@@ -32,9 +36,9 @@ $(document).ready(function(){
 	$("#register-form").validate({
 		rules: {
 			login: {
+				uniqueUserName: true,
 				required: true,
-				minlength: 5,
-				uniqueUserName: true
+				minlength: 5
 			},
 			fname: "required",
 			lname: "required",
@@ -52,9 +56,9 @@ $(document).ready(function(){
         },
 		messages: {
 			login: {
+				uniqueUserName: "Бла-бла-бла",
 				required: "Пожалуйста, введите логин",
-                minlength: "Минимальная длина логина - 5 символов",
-                uniqueUserName: "Извините, этот логин уже занят"
+                minlength: "Минимальная длина логина - 5 символов"  
 			},
 			fname: "Пожалуйста, введите Ваше имя",
 			lname: "Пожалуйста, введите Вашу фамилию",
@@ -69,7 +73,10 @@ $(document).ready(function(){
 			rpassword: "Пароли должны совпадать"
 		},
 		submitHandler: function(form) {
-			form.submit();
+			if (login_correct)
+				form.submit();
+			else
+				$('#login').focus();
 		}
 	});
 });

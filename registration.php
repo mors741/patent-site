@@ -144,6 +144,7 @@
 						<div class="fieldgroup">
 							<label for="login">Логин</label>
 							<input type="text" name="login" id="login" class="medium inputs"/>
+							<p id="login_error">Извините, этот логин уже занят</p>
 							<img id="tick" src="Pictures/tick.png" width="16" height="16"/>
 							<img id="cross" src="Pictures/cross.png" width="16" height="16"/>
 						</div>
