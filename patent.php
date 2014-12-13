@@ -140,7 +140,7 @@
 											
 						$query="UPDATE users SET inv_count=inv_count + 1 WHERE login = '$login';" or die("Ошибка при выполнении запроса.." . mysqli_error($link)); 
 						$link->query($query);
-						echo ('<div class="m_new_inv m_success">Изобретение успешно зарегистрировано.</div>');
+						echo ('<div class="m_new_inv m_success">Изобретение успешно зарегистрировано!</div>');
 					} else {
 						echo ('<div class="m_new_inv m_error">Система обнаружила крайне схожее изобретение! Пожалуйста, исправьте название или описание изобретения.</div>');
 					}
