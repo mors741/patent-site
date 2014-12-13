@@ -17,7 +17,12 @@ body {
 
 #menu{
 	position: absolute; /* Абсолютное позиционирование */
-	background-color: #ececec;
+	/*background-color: #ececec;*/
+	background: -webkit-linear-gradient(#f9f9ff, #f2f2fb); /* For Safari 5.1 to 6.0 */
+	background: -o-linear-gradient(#f9f9ff, #f2f2fb); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(#f9f9ff, #f2f2fb); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(#f9f9ff, #f2f2fb); /* Standard syntax */
+	
 	text-align: center;
 	border: 1.5px solid #b0b0b0;
 	display: block;

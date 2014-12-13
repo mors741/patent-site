@@ -30,46 +30,6 @@
 			<a href="inventions.php" class="button"/>Изобретения</a>
 			<a href="registration.php" class="button"/>Регистрация</a>
 		</div>
-		<!--
-		
-		<div id="reg">
-			<form method="post" action="registration.php" id="test">
-				Поля, помеченные звёздочкой <font color="red">*</font>, обязательны для заполнения<br>
-				<table>
-					<tr>
-						<td><b>Логин</b> <font color="red">*</font>:</td>
-						<td><input type="text" name="login" required /></td>
-					</tr>
-					<tr>
-						<td><b>Пароль</b> <font color="red">*</font>:</td>
-						<td><input type="password" class="password" name="password" id="password" required /></td>
-					</tr>
-					<tr>
-						<td><b>Повторите пароль</b> <font color="red">*</font>:</td>
-						<td><input type="password" name="rpassword" id="pass2" required /></td>
-					</tr>
-					<tr>
-						<td><b>Фамилия</b> <font color="red">*</font>:</td>
-						<td><input type="text" name="fname" required /></td>
-					</tr>
-					<tr>
-						<td><b>Имя</b> <font color="red">*</font>:</td>
-						<td><input type="text" name="name" required /></td>
-					</tr>
-					<tr>
-						<td><b>Отчество</b>:</td>
-						<td><input type="text" name="lname" /></td>
-					</tr>
-					<tr>
-						<td><b>eMail</b> <font color="red">*</font>:</td>
-						<td><input type="text" name="mail" required/></td>
-						<td>(К сожалению, домены на кириллице пока не поддерживаются)</td>
-					</tr>
-				</table>
-				<input type="submit" name="register" value="Зарегистрироваться" />
-			</form> 
-			-->
-
 		<?php
 			session_start();
 			$link = mysqli_connect('localhost','root','','patent') or die("Ошибка при соединении с базой данных.." . mysqli_error($link));
