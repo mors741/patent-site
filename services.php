@@ -4,10 +4,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf8"/>
 		<link rel="shortcut icon" href="Pictures/idea.ico">
 		
-        <script language="javascript" src="js/ajax.js"></script>
-		<script language="javascript" src="js/counter.js"></script>
+        <script type="text/javascript" src="js/ajax.js"></script>
+		<script type="text/javascript" src="js/counter.js"></script>
 		<script type="text/javascript" src="js/jquery.min.js"></script>
-		<script language="javascript" src="js/dropdown.js"></script>
+		<script type="text/javascript" src="js/dropdown.js"></script>
 		
 		<link rel="stylesheet" type="text/css" href="CSS/menu.css"/>
 		<link rel="stylesheet" type="text/css" href="CSS/button.css" />
@@ -120,7 +120,7 @@
 						<input name="searchq" type="text" id="searchq" size="30" onkeyup="javascript:searchNameq()"/>
 					</div>
 				</form>
-				<h3>Результаты</h3>
+				<h2>Результаты:</h2>
 				<div id="msg"></div>
 				<div id="search-result"></div>
 				</div>';        
@@ -139,7 +139,7 @@
 			do {
 				echo ('<div class="sector">
 							<h3>'.$inv_data['name'].'</h3>'
-							.'<center><img src="'.$inv_data['photo'].'" width="300" height="300" style="border: 1.5px solid #b0b0b0;"/></center><br>'."\n"
+							.'<center><img src="'.$inv_data['photo'].'" width="300" height="300"  class="f_image"/></center><br>'."\n"
 							.'<p>'.$inv_data['description']."</p>\n"
 							."<p>Автор: ".$inv_data['author']."</p>\n"
 							."<p>Зарегистрировано: ".$inv_data['date']."</p>\n"

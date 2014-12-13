@@ -58,7 +58,7 @@
 				while ($inv_data=mysqli_fetch_array($result)){
 					echo ('<div class="sector">
 								<h3>'.$inv_data['name'].'</h3>'
-								.'<center><img src="'.$inv_data['photo'].'" width="300" height="300" style="border: 1.5px solid #b0b0b0;"/></center><br>'."\n"
+								.'<center><img src="'.$inv_data['photo'].'" width="300" height="300"  class="f_image"/></center><br>'."\n"
 								.'<p>'.$inv_data['description']."</p>\n"
 								."<p>Автор: ".$inv_data['author']."</p>\n"
 								."<p>Зарегистрировано: ".$inv_data['date']."</p>\n"
@@ -68,7 +68,7 @@
 				};
 				echo ('</div>');
 			} else {
-				echo '<div id="content"><h2>Для просмотра своих изобретений и получения копии авторского свидетельства вы должны быть авторизованы <h2></div>';
+				echo '<div id="content"><h2>Для просмотра своих изобретений и получения копии авторского свидетельства вы должны быть авторизованы.<h2></div>';
 			}
 			if (isset($_COOKIE['login'])) {
 				$c=$_COOKIE['login'];

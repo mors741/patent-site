@@ -15,7 +15,19 @@
 	</head>
     <body>
 		<div id="menu">
-			<a href="index.php" class="logo" onclick="myFunction()" ><p id="counter"><?php echo $_COOKIE['count']; ?></p></a>
+			<a href="index.php" class="logo" onclick="myFunction()" >
+				<p id="counter">
+					<?php
+						if (isset($_COOKIE['count']) == false){
+							$t = strtotime('tomorrow');
+							setcookie('count','0',$t);
+							echo 0;
+						} else {
+							echo $_COOKIE['count']; 
+						}
+					?>
+				</p>
+			</a>
 			<a href="index.php"><img src="Pictures/Logo.png"></a> <br>
 			
 			<a href="index.php" class="button" />Главная</a>
@@ -27,7 +39,7 @@
 		
         <div id="right">
 			<h3>Скажи НЕТ плагиату и пиратству!</h3>
-			<img src='Pictures/plagiat3.png' id="image_1"  width="320" height="240" style="border: 1.5px solid #b0b0b0;" />		
+			<img src='Pictures/plagiat3.png' id="image_1"  width="320" height="240" class="f_image"/>		
 		</div>
 		
 		<?php
@@ -44,11 +56,6 @@
 					echo '<div class="m_auth m_error">Извините, время вашей сессии истекло</div>';
 				}
 				$_SESSION['last_activity'] = time(); // update last activity time stamp
-			}
-			
-			if (isset($_COOKIE['count']) === FALSE){
-				$t = strtotime('tomorrow');
-				setcookie("count",'0',"$t");
 			}
 			
 			if(isset($_POST['enter'])){
@@ -109,14 +116,14 @@
 				А так же ознакомиться с уже зарегистрированными изобретениями
 				и просто почитать новости в области науки.</p>
 			<p>Перед началом работы, пожалуйста, пройдите авторизацию.</p>
-			<table border="1">
+			<table>
 				<tr>
-					<td><a href="http://www.copyright.ru/ru/library/zakonoproekti/pravovoe_regulirovanie_in/prinyatie_zakona_o_borbe_/"><img src="Pictures/main1.jpg" width="300" height="300"/></a></td>
-					<td><a href="http://www.vaap.ru/content/registratsiya-avtorskogo-prava"><img src="Pictures/main3.jpg" width="300" height="300"/></a></td>
+					<td><a href="http://www.copyright.ru/ru/library/zakonoproekti/pravovoe_regulirovanie_in/prinyatie_zakona_o_borbe_/"><img src="Pictures/main1.jpg" width="300" height="300" class="f_image"/></a></td>
+					<td><a href="http://www.vaap.ru/content/registratsiya-avtorskogo-prava"><img src="Pictures/main3.jpg" width="300" height="300" class="f_image"/></a></td>
 				</tr>
 				<tr>
-					<td><a href="http://elvin-dill.livejournal.com/29186.html?thread=182274"><img src="Pictures/main4.jpg" width="300" height="300"/></a></td>
-					<td><a href="https://ru.wikipedia.org/wiki/%D0%9D%D0%B0%D1%80%D1%83%D1%88%D0%B5%D0%BD%D0%B8%D0%B5_%D0%B0%D0%B2%D1%82%D0%BE%D1%80%D1%81%D0%BA%D0%BE%D0%B3%D0%BE_%D0%BF%D1%80%D0%B0%D0%B2%D0%B0"><img src="Pictures/main2.jpg" width="300" height="300"/></a></td>				
+					<td><a href="http://elvin-dill.livejournal.com/29186.html?thread=182274"><img src="Pictures/main4.jpg" width="300" height="300" class="f_image"/></a></td>
+					<td><a href="https://ru.wikipedia.org/wiki/%D0%9D%D0%B0%D1%80%D1%83%D1%88%D0%B5%D0%BD%D0%B8%D0%B5_%D0%B0%D0%B2%D1%82%D0%BE%D1%80%D1%81%D0%BA%D0%BE%D0%B3%D0%BE_%D0%BF%D1%80%D0%B0%D0%B2%D0%B0"><img src="Pictures/main2.jpg" width="300" height="300" class="f_image"/></a></td>				
 				</tr>
 			</table>
 		</div>

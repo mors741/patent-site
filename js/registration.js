@@ -15,14 +15,14 @@ $(document).ready(function(){
 					res = response;
 					if(response == 1){
 						//$('#login').css('border', '3px #C33 solid');	
-						$('#tick').hide();
-						$('#cross').fadeIn();
+						//$('#tick').hide();     							// галочка и крестик
+						//$('#cross').fadeIn();  							// галочка и крестик
 						$('#login_error').fadeIn();
 						login_correct = false;
 					}else{
 						//$('#login').css('border', '3px #090 solid');
-						$('#cross').hide();
-						$('#tick').fadeIn();
+						//$('#cross').hide();								// галочка и крестик
+						//$('#tick').fadeIn();								// галочка и крестик
 						$('#login_error').hide();
 						login_correct = true;
 					}

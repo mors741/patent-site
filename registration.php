@@ -9,10 +9,8 @@
 		<script type="text/javascript" src="js/counter.js"></script>
 		<script type="text/javascript" src="js/registration.js"></script>
 		
-		<!-- Сделать локальными -->
-		<script src="//code.jquery.com/jquery-1.9.1.js"></script>
-		<script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
-		<!-- -->
+		<script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+		<script type="text/javascript" src="js/jquery.validate.min.js"></script>
 		
 		<link rel="stylesheet" type="text/css" href="CSS/menu.css"/>
 		<link rel="stylesheet" type="text/css" href="CSS/button.css" />

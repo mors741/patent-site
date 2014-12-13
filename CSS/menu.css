@@ -140,7 +140,7 @@ h3 {
     width:50%;
 }
 
- .frame {
+.f_image{
     border: 1px solid #b0b0b0;
-	border-radius: 3px;
-   }
+	border-radius: 7.5px;
+}
