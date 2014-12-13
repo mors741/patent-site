@@ -66,18 +66,18 @@
 						<h2>Найти плагиат</h2>
 						<form id="searchForm" name="searchForm" method="post" action="javascript:insertTask();">
 							<div class="searchInput">
-							<input name="searchq" type="text" id="searchq" size="30" onkeyup="javascript:searchNameq()"/>
+							<input name="searchq" type="text" id="searchq" size="30" class="inputs long" onkeyup="javascript:searchNameq()"/>
 						</form>
 					</div>
 					
-					<h3>Подсказки</h3>
+					<h2>Подсказки:</h2>
 					<div id="msg"></div>
 					<div id="search-result"></div>
 					</div>
 					<div id="left">
 						<h2>Удалить изобретение</h2>
 						<form method="get" action="services.php">
-							<input type="text" name="inv"><br>
+							<input type="text" class="inputs long" name="inv"><br>
 							<br>
 							<input type="checkbox" name="del_user" value="true">Вместе с пользователем
 							<br><br>
@@ -117,7 +117,7 @@
 						<h2>Найти похожие изобретения</h2>
 						<form id="searchForm" name="searchForm" method="post" action="javascript:insertTask();">
 						<div class="searchInput">
-						<input name="searchq" type="text" id="searchq" size="30" onkeyup="javascript:searchNameq()"/>
+						<input name="searchq" type="text" id="searchq" class="inputs long" size="30" onkeyup="javascript:searchNameq()"/>
 					</div>
 				</form>
 				<h2>Результаты:</h2>
