@@ -39,7 +39,7 @@
 					// last request was more than 2 minutes ago
 					session_unset();     // unset $_SESSION variable for the run-time 
 					session_destroy();   // destroy session data in storage
-					echo '<div class="m_auth error">Извините, время вашей сессии истекло</div>';
+					echo '<div class="m_auth error">Извините, время Вашей сессии истекло</div>';
 				}
 				$_SESSION['last_activity'] = time(); // update last activity time stamp
 			}
@@ -64,7 +64,7 @@
 					$query = "INSERT INTO users VALUES ('','$login','$password', '$fname','$pname','$lname','$email',0)" or die("Ошибка при выполнении запроса.." . mysqli_error($link));
 					$result = $link->query($query);
 					if ($result == 'TRUE'){
-						echo '<div class="m_auth m_success">Вы успешно зарегистрированы!<br>Теперь вы можете зайти на сайт</div>';    
+						echo '<div class="m_auth m_success">Вы успешно зарегистрированы!<br>Теперь Вы можете зайти на сайт</div>';    
 					}  
 					else {
 						echo '<div class="m_auth m_error">Ошибка при регистрации<br>нового пользователя</div>';  

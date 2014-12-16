@@ -53,7 +53,7 @@
 					// last request was more than 2 minutes ago
 					session_unset();     // unset $_SESSION variable for the run-time 
 					session_destroy();   // destroy session data in storage
-					echo '<div class="m_auth m_error">Извините, время вашей сессии истекло</div>';
+					echo '<div class="m_auth m_error">Извините, время Вашей сессии истекло</div>';
 				}
 				$_SESSION['last_activity'] = time(); // update last activity time stamp
 			}
@@ -112,7 +112,7 @@
 		<div id="content"> <br>
 			<h1>Добро пожаловать!</h1>
 			<p>Уважаемый посетитель, Вы попали на сайт Патентного отдела.
-				Тут вы сможете подать заявку на изобретение, оформить авторское свидетельство.
+				Тут Вы сможете подать заявку на изобретение, оформить авторское свидетельство.
 				А так же ознакомиться с уже зарегистрированными изобретениями
 				и просто почитать новости в области науки.</p>
 			<p>Перед началом работы, пожалуйста, пройдите авторизацию.</p>

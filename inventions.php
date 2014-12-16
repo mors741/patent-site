@@ -33,7 +33,7 @@
 					// last request was more than 2 minutes ago
 					session_unset();     // unset $_SESSION variable for the run-time 
 					session_destroy();   // destroy session data in storage
-					echo '<div class="m_auth m_error">Извините, время вашей сессии истекло</div>';
+					echo '<div class="m_auth m_error">Извините, время Вашей сессии истекло</div>';
 				}
 				$_SESSION['last_activity'] = time(); // update last activity time stamp
 			}
@@ -68,7 +68,7 @@
 				};
 				echo ('</div>');
 			} else {
-				echo '<div id="content"><h2>Для просмотра своих изобретений и получения копии авторского свидетельства вы должны быть авторизованы.<h2></div>';
+				echo '<div id="content"><h2>Для просмотра своих изобретений и получения копии авторского свидетельства Вы должны быть авторизованы.<h2></div>';
 			}
 			if (isset($_COOKIE['login'])) {
 				$c=$_COOKIE['login'];

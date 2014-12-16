@@ -67,7 +67,7 @@ $(document).ready(function(){
 				minlength: "Минимальная длина пароля - 5 символов"
 			},
 			email: {
-				required: "Пожалуйста, введите ваш Email адрес",
+				required: "Пожалуйста, введите Ваш Email адрес",
 				email:  "Некорректный формат Email адреса"
 			},
 			rpassword: "Пароли должны совпадать"

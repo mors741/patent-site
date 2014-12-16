@@ -86,7 +86,7 @@
 					// last request was more than 2 minutes ago
 					session_unset();     // unset $_SESSION variable for the run-time 
 					session_destroy();   // destroy session data in storage
-					echo '<div class="m_auth m_error">Извините, время вашей сессии истекло</div>';
+					echo '<div class="m_auth m_error">Извините, время Вашей сессии истекло</div>';
 				}
 				$_SESSION['last_activity'] = time(); // update last activity time stamp
 			}
